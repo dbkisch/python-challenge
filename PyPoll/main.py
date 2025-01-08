@@ -15,7 +15,6 @@ total_votes = 0  # Track the total number of votes cast
 # Define lists and dictionaries to track candidate names and vote counts
 candidate_names = []
 candidate_results = {}
-candidate_found = True
 candidate_votes = []
 candidate_index = 0
 percent_of_vote = 0
@@ -56,7 +55,6 @@ with open(file_to_load) as election_data:
         candidate_results["name"] = candidate_names
         candidate_results["votes"] = candidate_votes
         
-
 # Open a text file to save the output
 #with open(file_to_output, "w") as txt_file:
 
@@ -81,7 +79,7 @@ for i in range(len(candidate_results)+1):
         winner = candidate_results["name"][i]
 
         # Print and save each candidate's vote count and percentage
-    print(f'{candidate_results["name"][i]}' + ": " + str(percent_of_vote) + "% (" + f'{candidate_results["votes"][i]})')
+    print(f'{candidate_results["name"][i]}: {str(percent_of_vote)}% ({candidate_results["votes"][i]})')
 
     # Generate and print the winning candidate summary
 print("-----------------------------")

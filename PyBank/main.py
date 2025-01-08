@@ -100,10 +100,10 @@ print("")
 # Write the results to a text file
 
 with open(file_to_output, "w") as txt_file:
-    txt_file.writelines("Financial Analysis")
-    txt_file.writelines("")
-    txt_file.writelines("-----------------------------")
-    txt_file.writelines("")
+    txt_file.write("Financial Analysis")
+    txt_file.write("")
+    txt_file.write("-----------------------------")
+    txt_file.write("")
     txt_file.write(f'Total Months: {str(total_months)}')
     txt_file.write("")
     txt_file.write(f'Total: ${str(total_net)}')
