@@ -12,15 +12,16 @@ file_to_output = os.path.join("analysis", "election_analysis.txt")  # Output fil
 # Initialize variables to track the election data
 total_votes = 0  # Track the total number of votes cast
 
-# Define lists and dictionaries to track candidate names and vote counts
-candidate_names = []
-candidate_results = {}
-candidate_votes = []
-candidate_index = 0
 percent_of_vote = 0
 
-# Winning Candidate and Winning Count Tracker
+# Define lists and dictionaries to track candidate names and vote counts
+candidate_names = []
+candidate_votes = []
+candidate_results = {}
 
+
+# Winning Candidate and Winning Count Tracker
+candidate_index = 0
 
 # Open the CSV file and process it
 with open(file_to_load) as election_data:
@@ -56,34 +57,45 @@ with open(file_to_load) as election_data:
         candidate_results["votes"] = candidate_votes
         
 # Open a text file to save the output
-#with open(file_to_output, "w") as txt_file:
+with open(file_to_output, "w") as txt_file:
 
+    total_vote_count = (
+        f'Election Results\n\n'
+        f'-----------------------------\n\n'
+        f'Total Votes: {total_votes}\n\n'
+        f'-----------------------------\n\n'
+    )
     # Print the total vote count (to terminal)
-print("Election Results")
-print("-----------------------------")
-print("Total Votes: " + str(total_votes))
-print("-----------------------------")
-
+    print (total_vote_count)
+    
     # Write the total vote count to the text file
-
+    txt_file.write(total_vote_count)
 
     # Loop through the candidates to determine vote percentages and identify the winner
-for i in range(len(candidate_results)+1): 
+    for i in range(len(candidate_results)+1): 
 
         # Get the vote count and calculate the percentage
-    votes = int(candidate_results["votes"][i])
-    percent_of_vote = str(round((votes/total_votes*100),3))
- 
+        votes = int(candidate_results["votes"][i])
+        percent_of_vote = str(round((votes/total_votes*100),3))
+    
         # Update the winning candidate if this one has more votes
-    if votes > int(candidate_results["votes"][i-1]):
-        winner = candidate_results["name"][i]
+        if votes > int(candidate_results["votes"][i-1]):
+            winner = candidate_results["name"][i]
 
         # Print and save each candidate's vote count and percentage
-    print(f'{candidate_results["name"][i]}: {str(percent_of_vote)}% ({candidate_results["votes"][i]})')
+        candidate_vote_counts = (f'{candidate_results["name"][i]}: {str(percent_of_vote)}% ({candidate_results["votes"][i]})\n\n')
+
+        print(candidate_vote_counts)
+        
+        txt_file.write(candidate_vote_counts)
 
     # Generate and print the winning candidate summary
-print("-----------------------------")
-print("Winner: " + winner)
-print("-----------------------------")
+    winner_summary = (
+        f'-----------------------------\n\n'
+        f'Winner: {winner}\n\n'
+        f'-----------------------------\n'        
+    )
+    print(winner_summary)
 
     # Save the winning candidate summary to the text file
+    txt_file.write(winner_summary)

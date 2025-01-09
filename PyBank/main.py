@@ -64,53 +64,23 @@ with open(file_to_load) as financial_data:
         dec_index = net_change_list.index(greatest_decrease)
         month_greatest_decrease = str(months_list[dec_index])
 
-# Calculate the average net change across the months using a defined function
-#def average(numbers):
-#    length = len(numbers)
-#    total = 0.0
-#    for number in numbers:
-#        total += number
-#    return round((total / length),2)
-
-#average(net_change_list)
-
 # Calculate the average net change across the months using built-in functions
 average_net_change = round((sum(net_change_list) / len(net_change_list)),2)
 
 # Generate the output summary
-print("")
-print("Financial Analysis")
-print("")
-print("-----------------------------")
-print("")
-print(f'Total Months: {str(total_months)}')
-print("")
-print(f'Total: ${str(total_net)}')
-print("")
-print(f'Average Change: ${str(average_net_change)}')
-print("")
-print(f'Greatest Increase in Profits: {month_greatest_increase} (${str(greatest_increase)})')
-print("")
-print(f'Greatest Decrease in Profits: {month_greatest_decrease} (${str(greatest_decrease)})')
-print("")
-# Print the output
-
+analysis = (
+    f'Financial Analysis\n'
+    f'-----------------------------\n'
+    f'Total Months: {str(total_months)}\n'
+    f'Total: ${total_net:10,.0f}\n'
+    f'Average Change: ${average_net_change:10,.2f}\n'
+    f'Greatest Increase in Profits: {month_greatest_increase} (${greatest_increase:10,.0f})\n'
+    f'Greatest Decrease in Profits: {month_greatest_decrease} (${greatest_decrease:10,.0f})\n'
+) 
+print(analysis)
 
 
 # Write the results to a text file
 
 with open(file_to_output, "w") as txt_file:
-    txt_file.write("Financial Analysis")
-    txt_file.write("")
-    txt_file.write("-----------------------------")
-    txt_file.write("")
-    txt_file.write(f'Total Months: {str(total_months)}')
-    txt_file.write("")
-    txt_file.write(f'Total: ${str(total_net)}')
-    txt_file.write("")
-    txt_file.write(f'Average Change: ${str(average_net_change)}')
-    txt_file.write("")
-    txt_file.write(f'Greatest Increase in Profits: {month_greatest_increase} (${str(greatest_increase)})')
-    txt_file.write("")
-    txt_file.write(f'Greatest Decrease in Profits: {month_greatest_decrease} (${str(greatest_decrease)})')
-    txt_file.write("")
+    txt_file.write(analysis)
