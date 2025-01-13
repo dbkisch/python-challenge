@@ -1,26 +1,20 @@
-# -*- coding: UTF-8 -*-
-"""PyPoll Homework Starter File."""
-
+# PyPoll
 # Import necessary modules
 import csv
 import os
 
-# Files to load and output (update with correct file paths)
+# Files to load and output
 file_to_load = os.path.join("Resources", "election_data.csv")  # Input file path
 file_to_output = os.path.join("analysis", "election_analysis.txt")  # Output file path
 
 # Initialize variables to track the election data
 total_votes = 0  # Track the total number of votes cast
-
-percent_of_vote = 0
+percent_of_vote = 0 # Track the percentage of total vote 
 
 # Define lists and dictionaries to track candidate names and vote counts
 candidate_names = []
 candidate_votes = []
 candidate_results = {}
-
-
-# Winning Candidate and Winning Count Tracker
 candidate_index = 0
 
 # Open the CSV file and process it
@@ -33,32 +27,32 @@ with open(file_to_load) as election_data:
     # Loop through each row of the dataset and process it
     for row in reader:
 
-        # Print a loading indicator (for large datasets)
- #       print(". ", end="")
-
         # Increment the total vote count for each row
         total_votes += 1
 
         # Get the candidate's name from the row
         name = row[2]
 
-        # If the candidate is not already in the candidate list, add them
+        # If the candidate is already in the candidate list, update the index and increment their vote count
         if name in candidate_names:
             candidate_index = candidate_names.index(name)
             candidate_votes[candidate_index] += 1
         else:
+            # If the candidate is NOT already in the candidate list, add them plus an initial vote counter, 
+            # update the index and increment their vote count
             candidate_names.append(name)
             candidate_votes.append(0)
             candidate_index = candidate_names.index(name)
             candidate_votes[candidate_index] += 1
  
-        # Add a vote to the candidate's count
+        # Update the candidate's results
         candidate_results["name"] = candidate_names
         candidate_results["votes"] = candidate_votes
         
 # Open a text file to save the output
 with open(file_to_output, "w") as txt_file:
 
+    # Generate the header and total vote count
     total_vote_count = (
         f'Election Results\n\n'
         f'-----------------------------\n\n'
